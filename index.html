@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- TODO: Change title -->
-    <title>Website Template</title>
+    <title>CS 560: Homework 4</title>
 
     <!-- Load Bulma from CDN (consider saving it to repository instead) -->
     <!-- https://bulma.io/ -->
@@ -23,9 +23,9 @@
     <div class="hero-body">
       <div class="container">
         <!-- TODO: Change title -->
-        <h1 class="title">Website Title</h1>
+        <h1 class="title">Data Viz: Homework 4</h1>
         <!-- TODO: Change subtitle -->
-        <h2 class="subtitle">Website Subtitle</h2>
+        <h2 class="subtitle">by Angela Chen</h2>
       </div>
     </div>
   </section>
@@ -73,16 +73,6 @@
                 <span class="icon"><i class="fas fa-chart-area"></i></span>
                 <span>Area Chart</span>
               </a>
-
-              <hr class="navbar-divider">
-
-              <a class="navbar-item">
-                <span class="icon"><i class="fas fa-chart-bar"></i></span>
-                <span>Bar Chart</span>
-              </a>
-              <a class="navbar-item">
-                <span class="icon"><i class="fas fa-chart-pie"></i></span>
-                <span>Pie Chart</span>
               </a>
             </div>
           </div>
@@ -112,125 +102,65 @@
       <div class="content">
         <h1 class="title">
           <!-- TODO: Change page title -->
-          Page Title
+          Homework 4: SF Fire Data
         </h1>
         <p class="subtitle">
           <!-- TODO: Change page subtitle -->
-          Page Subtitle
+          Revisited
         </p>
 
         <p>This would be an excellent place to describe what this page is for, what to find in different sections, describe any motivation or theme behind your visualizations, and so on.</p>
 
-        <p>You should not use this template unless you intend to customize it. Make it your own. Keep in mind this simple template is over 300 lines! You can see other examples of websites using Bulma at their showcase: <a href="https://bulma.io/expo/">bulma.io/expo/</a>.</p>
+
 
         <h2 id="data">Data</h2>
 
-        <p>Include some detailed information about the dataset here. You should <a href="#">add a link</a> to the original dataset. You might also want to quote the license:</p>
+        <p><a href="https://data.sfgov.org/Public-Safety/Fire-Department-Calls-for-Service/nuek-vuh3/data">Fire Department Calls for Service</a> is a publicly available dataset provided by DataSF showing fire unit responses to calls. The full dataset has over 5.2 million rows and 34 columsn. I accessed this dataset in April 2020. The dataset is in the <a href="https://opendatacommons.org/licenses/pddl/1.0/">public domain</a>:</p>
 
         <blockquote>
           <p>
-            "This data is made available under the Public Domain Dedication and License v1.0 whose full text can be found at: <a href="http://www.opendatacommons.org/licenses/pddl/1.0/">www.opendatacommons.org/licenses/pddl/1.0/</a>"
+            "The Open Data Commons – Public Domain Dedication & Licence is a document intended to allow you to freely share, modify, and use this work for any purpose and without any restrictions." The full text can be found at: <a href="http://www.opendatacommons.org/licenses/pddl/1.0/">www.opendatacommons.org/licenses/pddl/1.0/</a>"
           </p>
-          <cite>Put a citation here, possibly link to the dataset license information directly.</cite>
         </blockquote>
 
-        <p>In addition to including a link to the source and license, you should describe the data. You might want a list of some sort to enumerate the different types of columns:</p>
+        <p>Relevant Columns:</p>
 
         <ol>
-          <li><strong>Column Name:</strong> Give a description of the column, including its type and possible range of values.</li>
+          <li><strong>Call Number:</strong> The unique identifier for a particular incident.</li>
 
-          <li><strong>Column Name:</strong> Give a description of the column, including its type and possible range of values.</li>
+          <li><strong>Station Area:</strong> "Fire Station First Response Area associated with the address of the incident"</li>
 
-          <li><strong>Column Name:</strong> Give a description of the column, including its type and possible range of values.</li>
-
-          <li><strong>Column Name:</strong> Give a description of the column, including its type and possible range of values.</li>
+          <li><strong>Batallion:</strong> "Emergency Response District (There are 9 Fire Emergency Response Districts)"</li>
         </ol>
-
-        <p>This will of course differ depending on the assignment and data.</p>
 
         <h3 id="wrangling">Wrangling</h3>
 
-        <p>Perhaps you had to do some data wrangling to the original dataset to prepare it for visualization. This would be a great place to discuss some of that wrangling.
+        <p>I used the DataSF web interface to filter on calls received during <strong>the month of March 2020</strong>, and grouped by Battalion and Station, rolling up by count of unique call IDs. I did the rest of the data wrangling (adding in nodes corresponding to the <a href="https://sf-fire.org/fire-station-locations">battalion and division</a>) in Excel by hand; I also dropped any problematic rows (Batallion 99 and calls grouped with missing Station Areas.) I then used <a href="http://jsonifyit.com/">JSONify It</a> to convert the <a href="fire-march-stripped.csv">CSV file</a> to a <a href="fire-march-stripped.json">JSON</a>. When trying to load the CSV file into d3.stratify(), I kept getting issues with no root, but I was able to read in the hardcoded JSON file.</p>
 
-        <pre>
-You can even put code into these pre blocks.
-  It will preserve whitespace.
-    That is helpful for formatted code.
-        </pre>
+        <script src="https://d3js.org/d3.v5.min.js"></script>
+        <script src="link.js"></script>
 
-        <p>You can alternatively embed a Gist if you want. There is an "embed" button on <a href="https://gist.github.com/octocat/6cad326836d38bd3a7ae">the Gist page</a> and results in something like this:</p>
-
-        <script src="https://gist.github.com/octocat/6cad326836d38bd3a7ae.js"></script>
-
+        <p>If you open the console, the entire json file has been logged; I also logged the ID of the root, "San Francisco".</p>
         <h2 id="visualizations">Visualizations</h2>
-
-        <p>Ideally not everything would be on a single page like this example. Instead, you might want to put each section in its own webpage. You would need to carefully replicate the page template (with the header, navbar, and footer) and make the necessary updates. For example, you want the "About" navbar item to be considered active on an "About" web page.</p>
-
-        <p>For now this is just a demo. The buttons below do not go anywhere, but can be easily changed to link to different visualization pages.</p>
-
-        <p class="buttons">
-          <a class="button is-large is-success" href="#">
-            <span class="icon is-medium">
-              <i class="fas fa-chart-line"></i>
-            </span>
-            <span>Line Chart</span>
-          </a>
-
-          <a class="button is-large is-primary" href="#">
-            <span class="icon is-medium">
-              <i class="fas fa-chart-area"></i>
-            </span>
-            <span>Area Chart</span>
-          </a>
-
-          <a class="button is-large is-info" href="#">
-            <span class="icon is-medium">
-              <i class="fas fa-chart-bar"></i>
-            </span>
-            <span>Bar Chart</span>
-          </a>
-
-          <a class="button is-large is-link" href="#">
-            <span class="icon is-medium">
-              <i class="fas fa-chart-pie"></i>
-            </span>
-            <span>Pie Chart</span>
-          </a>
-        </p>
-
-        <!-- https://github.com/vega/vega-embed#basic-example -->
-        <p>It is possible to embed some visualizations directly here too. Here is <a href="https://github.com/vega/vega-embed#basic-example">an example</a> using Vega-Lite:</p>
-
-        <script src="https://cdn.jsdelivr.net/npm/vega@5.9.0"></script>
-        <script src="https://cdn.jsdelivr.net/npm/vega-lite@4.0.2"></script>
-        <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.2.1"></script>
-
-        <div id="vis"></div>
-
-        <script type="text/javascript">
-        var spec = "https://raw.githubusercontent.com/vega/vega/master/docs/examples/bar-chart.vg.json";
-        vegaEmbed('#vis', spec).then(function(result) {
-          // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-        }).catch(console.error);
-        </script>
+        <p>DNE. Sorry.</p>
 
         <h4>Instructions</h4>
 
-        <p>You will likely need to include instructions on how to interpet and use the visualization. In the case above, if you click the three dots <i class="fas fa-ellipsis-h has-text-grey-light	"></i> above it will open a menu where you can either save the visualization to a SVG or PNG, or alternatively open it up in the online Vega Editor.</p>
+        <p>I would have encoded the number of calls per district as the area of each node..</p>
 
         <h4>Discussion</h4>
 
-        <p>You may also need other sections, like a discussion section, per-visualization section on data wrangling, and others. Because of the extra content and code visualizations take, it might be worthwhile to break up your pages into one home page and then one page per visualization.</p>
+        <p>It would be interesting (though out of the scope of this assignment) to see how fire calls changed with the shelter-in-place orders. Are there fewer calls at the office/workplace, and more calls at home? Do people cooking cause more accidents?</p>
 
         <span class="heading">Acknowledgements</span>
 
         <p>
-          <a href="#">Link to insiration</a><br/>
-          <a href="#">Link to StackOverflow snippet</a>
+          <a href="https://github.com/d3/d3-hierarchy#stratify">D3-Stratify</a><br/>
+          <a href-"https://observablehq.com/@sjengle/java-11-api-hierarchy-visualization">Java Hierarchy Lab</a>
         </p>
 
         <p class="is-6">
-          <em>Thanks to Person Name for their suggestion to do something with the visualization.</em>
+          <em>Thanks to Prof. Engle for her assignment to do something with the SF Fire dataset..</em>
         </p>
 
         <h2 id="grade">Grade</h2>
@@ -258,25 +188,7 @@ You can even put code into these pre blocks.
             <tr>
               <td>D</td>
               <td><i class="has-text-success fas fa-check-circle"></i></td>
-              <td>Discussion of how this grade level was satisfied. Exactly how this section should look will depend on the assignment in question. There is no requirement for formatting in this way. This is just an example of what a table element might look like for this informaiton.</td>
-            </tr>
-
-            <tr>
-              <td>C</td>
-              <td><i class="has-text-success fas fa-check-circle"></i></td>
-              <td>Discussion of how this grade level was satisfied.</td>
-            </tr>
-
-            <tr>
-              <td>B</td>
-              <td><i class="has-text-warning far fa-check-circle"></i></td>
-              <td>Discussion of how this grade level was satisfied.</td>
-            </tr>
-
-            <tr>
-              <td>A</td>
-              <td><i class="has-text-danger fas fa-times-circle"></i></td>
-              <td>Discussion of how this grade level was not satisfied.</td>
+              <td>I created a JSON hierarchy from the web data.</td>
             </tr>
           </tbody>
 
@@ -293,37 +205,33 @@ You can even put code into these pre blocks.
           </figure>
 
           <div class="media-content">
-            <div class="content">
-              <!-- TODO: Replace with contact information -->
-              <p>
-                <strong>Full Name</strong><br/>
-                CS Major, <a href="https://www.usfca.edu/">University of San Francisco</a><br/>
-                <em>Expected Graduation: 20??</em><br/>
-                <i class="fas fa-envelope"></i> <a href="mailto:username@dons.usfca.edu">username@dons.usfca.edu</a>
-              </p>
+    <div class="content">
+      <!-- TODO: Replace with contact information -->
+      <p>
+        <strong>Angela Chen</strong><br/>
+        CS Masters Student, <a href="https://www.usfca.edu/">University of San Francisco</a><br/>
+        <em>Expected Graduation: Spring 2020</em><br/>
+        <i class="fas fa-envelope"></i> <a href="mailto:achen35@dons.usfca.edu">achen35@dons.usfca.edu</a>
+      </p>
 
-              <!-- TODO: Replace with brief biography -->
-              <p>
-                Here is a brief bio about yourself. A good rule of thumb is to include at least one technical tidbit (favorite area or course within computer science), and one fun tidbit (such as loving dogs).
-              </p>
+      <!-- TODO: Replace with brief biography -->
+      <p>
+        I live on the Peninsula, and I love dogs and bubble tea! (Not dogs <em>in</em> bubble tea). This is my first front-end class. I finally found the option to change the theme.
+      </p>
 
-              <!-- TODO: Replace or remove tags -->
-              <!-- https://bulma.io/documentation/elements/tag/ -->
-              <div class="heading">Skills</div>
+      <!-- TODO: Replace or remove tags -->
+      <!-- https://bulma.io/documentation/elements/tag/ -->
+      <div class="heading">Skills</div>
 
-              <div class="tags">
-                <span class="tag">Python</span>
-                <span class="tag">C</span>
-                <span class="tag">Java</span>
-                <span class="tag">JavaScript</span>
-                <span class="tag">HTML</span>
-                <span class="tag">CSS</span>
-                <span class="tag">SVG</span>
-              </div>
-            </div>
-          </div>
-        </article>
-        <!-- End profile box -->
+      <div class="tags">
+        <span class="tag">Procrastinating</span>
+        <span class="tag">Petting Dogs</span>
+        <span class="tag">Eating Bread</span>
+      </div>
+    </div>
+  </div>
+</article>
+<!-- End profile box -->
 
       </div>
       <!-- End page content -->
@@ -343,7 +251,7 @@ You can even put code into these pre blocks.
 
       <p>
         <!-- TODO: Change to link to your Github repository -->
-        <a href="https://github.com/usf-cs360-spring2020/template-bulma" class="button is-small" style="padding-left: 1em; padding-right: 1em;">
+        <a href="https://github.com/usf-cs360-spring2020/homework4-allcapsangela" class="button is-small" style="padding-left: 1em; padding-right: 1em;">
           <i class="fab fa-github-alt"></i>&nbsp;<strong>Github</strong>
         </a>
 
